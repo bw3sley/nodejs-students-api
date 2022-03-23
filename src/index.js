@@ -18,4 +18,20 @@ app.get("/:id", (req, res) => {
     return res.json(student);
 });
 
+app.post("/new", (req, res) => {
+    const { name, email } = req.body;
+
+    const NewStudent = {
+        Id: randomUUID(),
+        StudentName: name,
+        StudentEmail: email
+    }
+
+    Students.push(NewStudent);
+
+    return res.send(JSON.stringify({
+        message: "Aluno cadastrado com sucesso!"
+    }));
+});
+
 app.listen(3000, () => console.log("Running at port 3000"));
