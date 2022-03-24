@@ -1,17 +1,27 @@
-import express from "express";
+const express = require("express");
 
-import { randomUUID } from "crypto";
+const { randomUUID } = require("crypto");
 
 const app = express();
+
+app.use(express.json())
 
 let Students = [];
 
 app.get("/", (req, res) => {
+    if(Students.length == "") return res.send(JSON.stringify({
+        message: "Nenhum aluno cadastrado!"
+    }));
+
     return res.json(Students);
 });
 
 app.get("/:id", (req, res) => {
     const { id } = req.params;
+
+    if(Students.length == "") return res.send(JSON.stringify({
+        message: "Aluno não encontrado!"
+    }));
 
     const student = Students.find(student => student.Id === id);
 
