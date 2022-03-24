@@ -34,4 +34,22 @@ app.post("/new", (req, res) => {
     }));
 });
 
+app.put("/update/:id", (req, res) => {
+    const { id } = req.params;
+
+    const { name, email } = req.body;
+
+    const studentId = Students.findIndex(student => student.Id === id);
+
+    Students[studentId] = {
+        ...Students[studentId],
+        StudentName: name,
+        StudentEmail: email
+    }
+
+    return res.send(JSON.stringify({
+        message: "Aluno atualizado com sucesso!"
+    }));
+});
+
 app.listen(3000, () => console.log("Running at port 3000"));
