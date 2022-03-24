@@ -52,4 +52,16 @@ app.put("/update/:id", (req, res) => {
     }));
 });
 
+app.delete("/delete/:id", (req, res) => {
+    const { id } = req.params;
+
+    const studentId = Students.findIndex(student => student.Id === id);
+
+    Students.splice(studentId, 1);
+
+    return res.send(JSON.stringify({
+        message: "Aluno deletado com sucesso!"
+    }))
+});
+
 app.listen(3000, () => console.log("Running at port 3000"));
