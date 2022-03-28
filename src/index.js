@@ -10,7 +10,12 @@ app.use(cors());
 
 app.use(express.json())
 
-let Students = [];
+const Students = [
+    {
+        name: "Wesley",
+        email: "wesley@example.com"
+    }
+];
 
 app.get("/", (req, res) => {
     if(Students.length == "") return res.send(JSON.stringify({
